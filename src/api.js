@@ -1,4 +1,9 @@
-const apiBase = import.meta.env.VITE_API_BASE_URL ?? '';
+const configuredApiBase = import.meta.env.VITE_API_BASE_URL ?? '';
+// `auto` keeps an admin page opened from a LAN device pointed at the API on
+// this machine, rather than at that device's own loopback interface.
+const apiBase = configuredApiBase === 'auto'
+  ? `${window.location.protocol}//${window.location.hostname}:8000`
+  : configuredApiBase;
 const tokenKey = 'nexa-admin-token';
 const userKey = 'nexa-admin-user';
 
